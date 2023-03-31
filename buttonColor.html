@@ -1,0 +1,248 @@
+<!-- <html>
+  <head>
+    <title>Exercise: DOM manipulations using onclick event listener</title>
+  </head>
+  <body>
+    <button type="button">Click Me!</button>
+    <script>
+        // random color generator 
+var randomColor = function(){
+  var rvalue = function() {
+  	return Math.round(Math.random()*255); 
+  }
+
+ 	return 'rgb(' + rvalue() + "," + rvalue() + "," + rvalue() + ")";
+}
+
+// get button element from DOM
+var button = document.querySelector('button');
+var body=document.querySelector('body');
+// create event listener to change background color on button click
+button.onclick = function(){
+	this.style.backgroundColor = randomColor();
+    for(var i=0;i<500000;i++){
+        body.style.backgroundColor=randomColor();
+    }
+}
+    </script>
+  </body>
+</html> -->
+
+
+
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+  <title>Smooth Color Transition</title>
+</head>
+<body>
+  <h1>Smooth Color Transition</h1>
+  <button id="start-button">Start</button>
+
+  <script>
+    var startButton = document.getElementById('start-button');
+    var body = document.body;
+    var intervalId;
+
+    function startTransition() {
+      var startColor = [255, 0, 0];  // starting color (red)
+      var endColor = [0, 0, 255];    // ending color (blue)
+      var steps = 50;                // number of steps in the transition
+      var duration = 5000;           // duration of the transition (in ms)
+      var stepInterval = duration / steps;  // interval between steps (in ms)
+      var stepIndex = 0;             // current step in the transition
+
+      // clear any previous transitions
+      clearInterval(intervalId);
+
+      // start the transition
+      intervalId = setInterval(function() {
+        // calculate the current color by interpolating between startColor and endColor
+        var currentColor = [
+          Math.round(startColor[0] + (endColor[0] - startColor[0]) * stepIndex / steps),
+          Math.round(startColor[1] + (endColor[1] - startColor[1]) * stepIndex / steps),
+          Math.round(startColor[2] + (endColor[2] - startColor[2]) * stepIndex / steps)
+        ];
+
+        // set the background color to the current color
+        body.style.backgroundColor = 'rgb(' + currentColor.join(',') + ')';
+
+        // increment the step index
+        stepIndex++;
+
+        // if we've reached the end of the transition, stop the interval
+        if (stepIndex > steps) {
+          clearInterval(intervalId);
+        }
+      }, stepInterval);
+    }
+
+    startButton.addEventListener('click', startTransition);
+  </script>
+</body>
+</html> -->
+
+
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+  <title>Color Transition</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+    }
+  </style>
+</head>
+<body>
+    <h1>Smooth Color Transition</h1>
+  <button id="start-button">Start</button>
+
+  <script>
+    var body = document.querySelector('body');
+var steps = 100;
+var currentStep = 0;
+var intervalId;
+
+// generate a random color using HSL color model
+var randomHSLColor = function() {
+  var hue = Math.round(Math.random() * 360);
+  var saturation = Math.round(Math.random() * 100);
+  var lightness = Math.round(Math.random() * 100);
+  return 'hsl(' + hue + ', ' + saturation + '%, ' + lightness + '%)';
+}
+
+// transition between two colors using HSL color model
+var transitionColor = function(startColor, endColor) {
+  var startHSL = startColor.match(/\d+/g);
+  var endHSL = endColor.match(/\d+/g);
+  var deltaHSL = [
+    (endHSL[0] - startHSL[0]) / steps,
+    (endHSL[1] - startHSL[1]) / steps,
+    (endHSL[2] - startHSL[2]) / steps
+  ];
+
+  clearInterval(intervalId);
+  intervalId = setInterval(function() {
+    if (currentStep >= steps) {
+      clearInterval(intervalId);
+    } else {
+      var newHSL = [
+        parseInt(startHSL[0]) + deltaHSL[0] * currentStep,
+        parseInt(startHSL[1]) + deltaHSL[1] * currentStep,
+        parseInt(startHSL[2]) + deltaHSL[2] * currentStep
+      ];
+      body.style.backgroundColor = 'hsl(' + newHSL[0] + ', ' + newHSL[1] + '%, ' + newHSL[2] + '%)';
+      currentStep++;
+    }
+  }, 10);
+}
+
+// trigger color transition on button click
+var button = document.querySelector('button');
+button.addEventListener('click', function() {
+  var colors = [];
+  for (var i = 0; i < 5; i++) {
+    colors.push(randomHSLColor());
+  }
+  var colorIndex = 0;
+  currentStep = 0;
+  transitionColor(colors[colorIndex], colors[colorIndex + 1]);
+  colorIndex += 2;
+  if (colorIndex >= colors.length) {
+    colorIndex = 0;
+  }
+});
+  </script>
+
+  <button>Change Color</button>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Color Transition</title>
+  </head>
+  <body>
+    <div id="container">
+      <h1>Color Transition</h1>
+      <p>Click the button below to start the transition:</p>
+      <button onclick="startTransition()">Start</button>
+    </div>
+
+    <script>
+      function startTransition() {
+        var container = document.querySelector("#container");
+        var colors = [
+          "#FF6633",
+          "#FFB399",
+          "#FF33FF",
+          "#FFFF99",
+          "#00B3E6",
+          "#E6B333",
+          "#3366E6",
+          "#999966",
+          "#99FF99",
+          "#B34D4D",
+          "#80B300",
+          "#809900",
+          "#E6B3B3",
+          "#6680B3",
+          "#66991A",
+          "#FF99E6",
+          "#CCFF1A",
+          "#FF1A66",
+          "#E6331A",
+          "#33FFCC",
+          "#66994D",
+          "#B366CC",
+          "#4D8000",
+          "#B33300",
+          "#CC80CC",
+          "#66664D",
+          "#991AFF",
+          "#E666FF",
+          "#4DB3FF",
+          "#1AB399",
+          "#E666B3",
+          "#33991A",
+          "#CC9999",
+          "#B3B31A",
+          "#00E680",
+          "#4D8066",
+          "#809980",
+          "#E6FF80",
+          "#1AFF33",
+          "#999933",
+          "#FF3380",
+          "#CCCC00",
+          "#66E64D",
+          "#4D80CC",
+          "#9900B3",
+          "#E64D66",
+          "#4DB380",
+          "#FF4D4D",
+          "#99E6E6",
+          "#6666FF"
+        ];
+        var i = 0;
+
+        function changeBackground() {
+          container.style.backgroundColor = colors[i];
+          i++;
+          if (i >= colors.length) {
+            i = 0;
+          }
+          setTimeout(changeBackground, 1000);
+        }
+
+        changeBackground();
+      }
+    </script>
+  </body>
+</html>
